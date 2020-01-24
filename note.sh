@@ -29,7 +29,7 @@ function note-add () {
     note-update
     TIMESTAMP=$(date -Is | awk -F'+' '{print $1}' | tr ':' '-')
     FILENAME=$NOTEDIR/$TIMESTAMP.md
-    vim -c ":MarkdownPreview" $FILENAME
+    vim -c ":MarkdownPreview" -c ":ToggleAutosave" $FILENAME
     note-push
 }
 
@@ -52,7 +52,7 @@ function note-search () {
     note-update
     OUT=$(_note-search)
     if [ ! -z "$OUT" ]; then
-        vim -c ":MarkdownPreview" $NOTEDIR/$OUT
+        vim -c ":MarkdownPreview" -c ":ToggleAutosave" $NOTEDIR/$OUT
         note-push
     fi
 }
