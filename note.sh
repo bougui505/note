@@ -45,7 +45,7 @@ function _note-strings () {
 }
 
 function _note-search () {
-    _note-strings | fzf -e | awk -F: '{print $1}'
+    _note-strings | fzf -e --tac | awk -F: '{print $1}'
 }
 
 function note-search () {
