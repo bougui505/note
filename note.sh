@@ -6,6 +6,7 @@
 # 2020-01-24 10:52:12 (UTC+0100)
 
 NOTEDIR="$HOME/notes/notes"
+NOTEGIT="https://github.com/bougui505/notes/blob/master/notes"
 
 # Colored output: (see: https://unix.stackexchange.com/a/276487/68794)
 autoload colors; colors
@@ -53,6 +54,14 @@ function note-search () {
     if [ ! -z "$OUT" ]; then
         vim $NOTEDIR/$OUT
         note-push
+    fi
+}
+
+function note-web () {
+    note-update
+    OUT=$(_note-search)
+    if [ ! -z "$OUT" ]; then
+        google-chrome $NOTEGIT/$OUT
     fi
 }
 
