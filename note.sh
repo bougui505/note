@@ -7,6 +7,7 @@
 
 NOTEDIR="$HOME/notes/notes"
 NOTEGIT="https://github.com/bougui505/notes/blob/master/notes"
+EDITORCMD='nvim -c ":MarkdownPreview" -c ":ToggleAutosave"'
 
 # Colored output: (see: https://unix.stackexchange.com/a/276487/68794)
 autoload colors; colors
@@ -29,7 +30,7 @@ function note-add () {
     note-update
     TIMESTAMP=$(date -Is | awk -F'+' '{print $1}' | tr ':' '-')
     FILENAME=$NOTEDIR/$TIMESTAMP.md
-    nvim -c ":MarkdownPreview" -c ":ToggleAutosave" $FILENAME
+    $EDITORCMD $FILENAME
     note-push
 }
 
@@ -52,7 +53,7 @@ function note-search () {
     note-update
     OUT=$(_note-search)
     if [ ! -z "$OUT" ]; then
-        nvim -c ":MarkdownPreview" -c ":ToggleAutosave" $NOTEDIR/$OUT
+        $EDITORCMD $NOTEDIR/$OUT
         note-push
     fi
 }
