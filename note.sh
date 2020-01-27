@@ -65,6 +65,16 @@ function note-web () {
     fi
 }
 
+function note-pdf () {
+    # Convert a note to a pdf document
+    note-update
+    OUT=$(_note-search)
+    if [ ! -z "$OUT" ]; then
+        BASENAME=$OUT:r
+        pandoc $NOTEDIR/$OUT --pdf-engine=xelatex -V geometry:margin=2cm -o $BASENAME.pdf
+    fi
+}
+
 function note-rm () {
     note-update
     CWD=$(pwd)
